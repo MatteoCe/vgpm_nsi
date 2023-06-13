@@ -24,11 +24,13 @@ The scripts can be run at once by navigating to a directory that must include bo
 
 ## License
 
-Specify the license under which the project is distributed. You can include the full license text in a separate file or provide a summary of the license terms. If you're using an open-source license, provide a link to the license file or the license's website.
+You are free to modify and use this script in your projects. If you use this script, we kindly request you to cite our paper as follows:
+
+[Author(s)]: "Title of the Paper," Conference/Journal Name, Year. [DOI or URL](link to the paper)
 
 ## Contact
 
-Include contact information for the project maintainer or team. You can provide an email address, a link to a website, or any other relevant contact details.
+Inquiries can be forwarded to matteocecchetto@gmail.com
 
 ## References
 

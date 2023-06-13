@@ -204,7 +204,7 @@ if (args[2] == "month") {
 # This is done because the seasonality index is an annual index, thus the index will be calculate for each year
 years <- unique(stringr::str_replace(scan(file="processed/filelist"), "...$", ""))
 
-# create list of colnames for the final table based on the number of years and the two chosen seasonality indices.
+# create vector of colnames for the final table based on the number of years and the two chosen seasonality indices.
 # Previous versions of the script also calculated the seasonality index by Lutz et al. 2007, although, again for speed,
 # that part is removed from the analyses, and the l.inspp column will be left empty and removed.
 years_col <- unlist(lapply(1:length(years), function(x) {
