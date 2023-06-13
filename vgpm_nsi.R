@@ -9,12 +9,12 @@ if(args[1] == 1){
 # No specific packages are necessary to calculate the VGPM. Here, the package geosphere was used in previous version of the
 # script to calculate the daylength of specific days, later removed to calculate it using base R
 
-# define max number of cores for parallelization. Here it is set to half of the available, but can me modified
-n.core <- detectCores()/2
-
 #library(geosphere)
 library(tidyverse)
 library(parallel)
+
+# define max number of cores for parallelization. Here it is set to half of the available, but can me modified
+n.core <- detectCores()/2
 
 filename <- args[2]
 
