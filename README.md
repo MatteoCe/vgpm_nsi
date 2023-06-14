@@ -24,11 +24,14 @@ The scripts can be run at once by navigating to a directory that must include bo
 
 The image below was obtained by running the scripts on 8day data from 2009 to 2011 and choosing the following geographic bounding box:
 
+
 | region | minlon | maxlon | minlat | maxlat |
 | -------- | -------- | -------- | -------- | -------- |
-| Row 1, antarctica | Row 1, -180 | Row 1, 180 | Row 1, -80 | Row 1, -40 |
+| antarctica | -180 | 180 | -80 | -40 |
 
-![alternate text](./tests/processed/final/map1_mod.png)
+
+
+<img alt="Image Description" src="tests/processed/final/map1_mod.png" style="width: 450px; height:400px">
 
 This image was produced using QGIS<sup>5</sup> and the package Quantarctica<sup>6</sup>. The blue and red lines are two of the major oceanographic fronts, estimated from observed temperature and salinity data<sup>7</sup>.
 
