@@ -8,6 +8,7 @@ The scripts download, process and calculate the VGPM model from the ancillary da
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Example](#example)
 - [License](#license)
 - [Contact](#Contact)
 - [References](#References)
@@ -22,6 +23,10 @@ The scripts can be run at once by navigating to a directory that must include bo
 
 	bash -i main.sh 8day		# change the argument to "month" if monthly data are required
 
+Two tsv files will be obtained at the end of the analyses, one including latitude, longitude and the NSI for each year at each point (final.tab) and another including only the average NSI for the entire years range (b_isnpp.tab).
+
+## Example
+
 The image below was obtained by running the scripts on 8day data from 2009 to 2011 and choosing the following geographic bounding box:
 
 | region | minlon | maxlon | minlat | maxlat |
@@ -33,7 +38,13 @@ The image below was obtained by running the scripts on 8day data from 2009 to 20
 <img src="figures/map.png" style="width: 700px; height:700px">
 <p>
 
-This image was produced using QGIS<sup>5</sup> and the package Quantarctica<sup>6</sup>. The blue and red lines are two of the major oceanographic fronts, estimated from observed temperature and salinity data<sup>7</sup>.
+This image was produced using QGIS<sup>5</sup> and the package Quantarctica<sup>6</sup>, by applying a TIN interpolation. The blue and red lines are two of the major oceanographic fronts, estimated from observed temperature and salinity data<sup>7</sup>.
+
+<p align="center">
+<img src="figures/map2.png" style="width: 700px; height:700px">
+<p>
+
+Here, the same raster file of NSI values is overlapped by the monthly median sea ice extents for the period 1981-2010 of September (solid line) and February (dashed line).
 
 ## License
 
@@ -60,3 +71,5 @@ Inquiries can be forwarded to matteocecchetto@gmail.com
 6 - Matsuoka, Kenichi, Anders Skoglund, George Roth, Jean de Pomereu, Huw Griffiths, Robert Headland, Brad Herried, Katsuro Katsumata, Anne Le Brocq, and Kathy Licht. “Quantarctica, an Integrated Mapping Environment for Antarctica, the Southern Ocean, and Sub-Antarctic Islands.” Environmental Modelling & Software 140 (2021): 105015.
 
 7 - Alejandro H. Orsi, Thomas Whitworth III, and Worth D. Nowlin Jr (1995), On the meridional extent and fronts of the Antarctic Circumpolar Current., Deep-Sea Research, 42, 5, 641-673 
+
+8 - Fetterer, F., K. Knowles, W. Meier, M. Savoie, and A. K. Windnagel. 2016, updated daily. Sea Ice Index, Version 2. [Indicate subset used]. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. doi: http://dx.doi.org/10.7265/N5736NV7.
