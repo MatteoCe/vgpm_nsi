@@ -22,6 +22,16 @@ The scripts can be run at once by navigating to a directory that must include bo
 
 	bash -i main.sh 8day		# change the argument to "month" if monthly data are required
 
+The image below was obtained by running the scripts on 8day data from 2009 to 2011 and choosing the following geographic bounding box:
+
+| region | minlon | maxlon | minlat | maxlat |
+| -------- | -------- | -------- | -------- | -------- |
+| Row 1, antarctica | Row 1, -180 | Row 1, 180 | Row 1, -80 | Row 1, -40 |
+
+![alternate text](./tests/processed/final/map1_mod.png)
+
+This image was produced using QGIS<sup>5</sup> and the package Quantarctica<sup>6</sup>. The blue and red lines are two of the major oceanographic fronts, estimated from observed temperature and salinity data<sup>7</sup>.
+
 ## License
 
 You are free to modify and use this script in your projects. If you use this script, we kindly request you to cite our paper as follows:
@@ -34,10 +44,16 @@ Inquiries can be forwarded to matteocecchetto@gmail.com
 
 ## References
 
-1 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
+1 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production 		and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
 
 2 - GDAL/OGR Contributors. GDAL/OGR Geospatial Data Abstraction Software Library. (2022).
 
 3 - Wickham, H. et al. Welcome to the {tidyverse}. J. Open Source Softw. 4, 1686 (2019).
 
 4 - R Core Team. R: A Language and Environment for Statistical Computing. (2022)
+
+5 - QGIS Development Team. “QGIS Geographic Information System.” Open source geospatial foundation project, 2023. http://qgis.osgeo.org.
+
+6 - Matsuoka, Kenichi, Anders Skoglund, George Roth, Jean de Pomereu, Huw Griffiths, Robert Headland, Brad Herried, Katsuro Katsumata, Anne Le Brocq, and Kathy Licht. “Quantarctica, an Integrated Mapping Environment for Antarctica, the Southern Ocean, and Sub-Antarctic Islands.” Environmental Modelling & Software 140 (2021): 105015.
+
+7 - Alejandro H. Orsi, Thomas Whitworth III, and Worth D. Nowlin Jr (1995), On the meridional extent and fronts of the Antarctic Circumpolar Current., Deep-Sea Research, 42, 5, 641-673 
