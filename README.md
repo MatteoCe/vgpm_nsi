@@ -1,6 +1,6 @@
 # NPP Normalized Seasonality Index calculator
 
-This repository store the scripts used in the paper "XXX" to calculate the Normalized Seasonality Index (NSI) of the Net Primary Productivity (NPP), following<sup>1</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
+This repository store the scripts used in the paper "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale" to calculate the Normalized Seasonality Index (NSI) of the Net Primary Productivity (NPP), following<sup>1</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
 
 The scripts download, process and calculate the VGPM model from the ancillary data indicated by the Ocean Productivity website, providing a final average NSI index, for the specified time range and decimal coordinates bounding box. Both 8day and monthly data can be processed.
 
