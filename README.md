@@ -1,54 +1,85 @@
-# NPP Normalized Seasonality Index calculator
+# Environmental Data download from MODIS and Copernicus
 
-This repository store the scripts used in the paper "XXX" to calculate the Normalized Seasonality Index (NSI) of the Net Primary Productivity (NPP), following<sup>1</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
+This repository stores the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to download satellite data corresponding to Sea Surface Salinity, Sea Surface Temperature, Diffuse Attenuation coefficient, Photosynthetic Available Radiation and calculate the Normalized Seasonality Index for seasonality of NPP, following Brown et al.<sup>2</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
 
-The scripts download, process and calculate the VGPM model from the ancillary data indicated by the Ocean Productivity website, providing a final average NSI index, for the specified time range and decimal coordinates bounding box. Both 8day and monthly data can be processed.
+The scripts download satellite data, process and calculate the VGPM model from the ancillary data indicated by the Ocean Productivity website, providing a final average NSI index, for the specified time range, as well as the other environmental variables previously mentioned.
+
+It works on daily data from Copernicus and 8-day MODIS data, and can download produce long-term averages and range values for a single or multiple time ranges. If not specified otherwise, the scripts produce environmental data for the samples' locations included in the dataset in Cecchetto et al.<sup>1</sup>. 
 
 ## Table of Contents
 
-- [Installation](#installation)
+- [Installation and requirements](#installation and requirements)
 - [Usage](#usage)
 - [Example](#example)
 - [License](#license)
 - [Contact](#Contact)
 - [References](#References)
 
-## Installation
+## Installation and requirements
 
-The two scripts, "main" and "vgpm nsi", are written in bash and R respectively, and rely on a limited number of programs and R packages. In order to use the scripts, _GDAL_<sup>2</sup> (Geospatial Data Abstraction Library), _GNU parallel_ and the R packages _tidyverse_<sup>3</sup> and _parallel_<sup>4</sup> must be installed. The scripts must be run from the bash terminal, after assuring that R can be run from it.
+The two main scripts, "env\_download.sh" and "env\_process.R", are written in bash and R<sup>3</sup> (version 4.3.3) respectively, and rely on a limited number of programs and R packages. In order to use the scripts, _GDAL_<sup>4</sup> (Geospatial Data Abstraction Library, version 3.8.4), _GNU parallel_<sup>5</sup> (version 20161222) and _SAGA_<sup>6</sup> (command line version 9.4.0), as well as the R packages _tidyverse_<sup>7</sup>, must be installed. The scripts must be run from the bash terminal, after assuring that R can be run in interactive mode from it.
+
+Cloning this repository in a local directory will copy all required files in a directory called "scripts". All commands must be run in the parent directory.
+
+A variety of additional scripts and files allow to properly process the satellite data:
+
+- the directory "gdal\_scripts" include additional python scripts from the same version of GDAL and allow different operations on shapefiles. 
+
+- "grid\_ref" includes the shell scripts that will allow to produce "no\_data" small regions at the corners of the Mercator world projection and help merge correctly the satellite data.
+
+- "support\_files" allows to create shapefiles from scratch.
+
+- "shapefiles\_global" includes the Global, Self‐consistent, Hierarchical, High‐resolution Shoreline database<sup>8</sup> (GSHHS), used to remove satellite points falling on land.
 
 ## Usage
 
-The scripts can be run at once by navigating to a directory that must include both scripts and the data sub-directory, which will store the two files "manifest", with the list of http links to the ancillary data for chlorophyll, photosynthetically active radiation and sea surface temperatures, and "region_coord", a tsv file with the bounding box for the geographical region of interest. After editing both files as interested (if monthly data are required modify the manifest list including "month" instead of 8day in each link), the scripts can be run with this command:
+The scripts can be run using the "starter.sh" shell script:
 
-	bash -i main.sh 8day		# change the argument to "month" if monthly data are required
+	bash -i scripts/starter.sh "local"
 
-Two tsv files will be obtained at the end of the analyses, one including latitude, longitude and the NSI for each year at each point (final.tab) and another including only the average NSI for the entire years range (b_isnpp.tab).
+This script will search for a text file named "yearrange", which will include the entire years range used to download satellite data. This is how the text file should look like, as used for the analyses in Cecchetto et al.<sup>???</sup>:
 
-Multiple methods can be adopted to produce a raster file for further analyses. For this paper, a kriging interpolation was performed using SAGA CMD<sup>5</sup>, based on the 12 nearest points. The tsv file was first imported in QGIS<sup>6</sup> and then exported as a shapefile. The interpolation was performed on the command line using this code.
+	2013-01-01|2021-01-01
 
-	saga_cmd statistics_kriging 0 -POINTS b_isnpp.shp -ZFIELD b.isnpp -TQUALITY 0 -SEARCH_POINTS_ALL 0 -SEARCH_POINTS_MIN 4 -SEARCH_POINTS_MAX 12 -TARGET_USER_SIZE 0.08 -TARGET_DEFINITION:0 -TARGET_USER_XMIN -179.916666667 -TARGET_USER_XMAX 179.916666667 -TARGET_USER_YMIN -78.583333333 -TARGET_USER_YMAX 84.083333333
+The script will download the satellite data and process it to obtain long-term averages and ranges for the time periods specified in another text file, "timeframes", which necessarily must be included in the time range provided with the text file "yearrange". If not provided, the timeframes file will be created using the contents of "yearrange".
+
+The scripts will produce different directories and remove data as soon as it is processed, to free up space.
+
+At the end of the analyses, raster tif files will be found in the "variables/tif" directory.
+
+Interpolation will be performed following a kriging interpolation at 0.04 degrees of cellsize. 
+
+If the first argument to the "starter.sh" script is "local", the raster files will be created only for the locations included in the dataset found in Cecchetto et al.<sup>???</sup>.
+
+If the first argument is "global", then the interpolation will be performed at the global scale, after subdividing the satellite data in different regions.
 
 ## Example
 
-The image below was obtained by running the scripts on 8day data from 2009 to 2011 and choosing the following geographic bounding box:
-
-| region | minlon | maxlon | minlat | maxlat |
-| -------- | -------- | -------- | -------- | -------- |
-| antarctica | -180 | 180 | -80 | -40 |
-
+The images below were obtained by running the scripts on "local" from 2013 to 2020, and depict Sea Surface Salinity ranges and Net Primary Productivity mean for the Adriatic and Black sea, respectively.
 
 <p align="center">
-<img src="figures/map.png" style="width: 700px; height:700px">
+<img src="example_results/github_example3.jpg" style="width: 700px; height:700px">
 <p>
 
-This image was produced using QGIS<sup>6</sup> and the package Quantarctica<sup>7</sup>, by applying a TIN interpolation. The blue and red lines are two of the major oceanographic fronts, estimated from observed temperature and salinity data<sup>8</sup>.
+<hr>
 
 <p align="center">
-<img src="figures/map2.png" style="width: 700px; height:700px">
+<img src="example_results/github_example4.jpg" style="width: 700px; height:700px">
 <p>
 
-Here, the same raster file of NSI values is overlapped by the monthly median sea ice extents for the period 1981-2010<sup>9</sup> of September (solid line) and February (dashed line).
+The images below were obtained by running the scripts on "global" from 2013 to 2020, and show the Seasonality Index (NSI) and Total Net Primary Productivity.
+
+<p align="center">
+<img src="example_results/github_example1.jpg" style="width: 700px; height:450px">
+<p>
+
+<hr>
+
+<p align="center">
+<img src="example_results/github_example2.jpg" style="width: 700px; height:450px">
+<p>
+
+Coastlines were obtained from the Global, Self‐consistent, Hierarchical, High‐resolution Shoreline database<sup>8</sup> (GSHHS), while maps were created in QGIS<sup>9</sup>.
 
 ## License
 
@@ -62,20 +93,20 @@ Inquiries can be forwarded to matteocecchetto@gmail.com
 
 ## References
 
-1 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production 		and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
+1 - Cecchetto et al. ???
 
-2 - GDAL/OGR Contributors. GDAL/OGR Geospatial Data Abstraction Software Library. (2022).
+2 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production 		and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
 
-3 - Wickham, H. et al. Welcome to the {tidyverse}. J. Open Source Softw. 4, 1686 (2019).
+3 - R Core Team. R: A Language and Environment for Statistical Computing. (2024)
 
-4 - R Core Team. R: A Language and Environment for Statistical Computing. (2022)
+4 - GDAL/OGR Contributors. GDAL/OGR Geospatial Data Abstraction Software Library. (2022).
 
-5 - Conrad, O. et al. System for Automated Geoscientific Analyses (SAGA) v. 2.1.4. https://gmd.copernicus.org/preprints/8/2271/2015/gmdd-8-2271-2015.pdf (2015) doi:10.5194/gmdd-8-2271-2015.
+5 - Tange, Ole. "GNU Parallel 20201122 ('Biden')." November 2020. Zenodo. DOI: 10.5281/zenodo.4284075. https://doi.org/10.5281/zenodo.4284075
 
-6 - QGIS Development Team. “QGIS Geographic Information System.” Open source geospatial foundation project, 2023. http://qgis.osgeo.org.
+6 - Conrad, O. et al. System for Automated Geoscientific Analyses (SAGA) v. 2.1.4. https://gmd.copernicus.org/preprints/8/2271/2015/gmdd-8-2271-2015.pdf (2015) doi:10.5194/gmdd-8-2271-2015.
 
-7 - Matsuoka, Kenichi, Anders Skoglund, George Roth, Jean de Pomereu, Huw Griffiths, Robert Headland, Brad Herried, Katsuro Katsumata, Anne Le Brocq, and Kathy Licht. “Quantarctica, an Integrated Mapping Environment for Antarctica, the Southern Ocean, and Sub-Antarctic Islands.” Environmental Modelling & Software 140 (2021): 105015.
+7 - Wickham, H. et al. Welcome to the {tidyverse}. J. Open Source Softw. 4, 1686 (2019).
 
-8 - Alejandro H. Orsi, Thomas Whitworth III, and Worth D. Nowlin Jr (1995), On the meridional extent and fronts of the Antarctic Circumpolar Current., Deep-Sea Research, 42, 5, 641-673 
+8 - Wessel, P. & Smith, W. H. F. A global, self‐consistent, hierarchical, high‐resolution shoreline database. J. Geophys. Res. Solid Earth 101, 8741–8743 (1996).
 
-9 - Fetterer, F., K. Knowles, W. Meier, M. Savoie, and A. K. Windnagel. 2016, updated daily. Sea Ice Index, Version 2. [Indicate subset used]. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. doi: http://dx.doi.org/10.7265/N5736NV7.
+9 - QGIS Development Team. “QGIS Geographic Information System.” Open source geospatial foundation project, 2023. http://qgis.osgeo.org.

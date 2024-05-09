@@ -1,0 +1,14 @@
+{
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+            [xmin, ymin],
+            [xmin, ymax],
+            [xmax, ymax],
+            [xmax, ymin],
+            [xmin, ymin]  // Repeat the first coordinate to close the polygon
+        ]]
+    }
+}
