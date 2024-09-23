@@ -1,6 +1,6 @@
 # Environmental Data download from MODIS and Copernicus
 
-This repository stores the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production, rather than its magnitude, explains the richness of pioneer hard-bottom animals at the global scale." to download satellite data corresponding to Sea Surface Salinity, Sea Surface Temperature, Diffuse Attenuation coefficient, Photosynthetic Available Radiation and calculate the Normalized Seasonality Index for seasonality of NPP, following Brown et al.<sup>2</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
+This repository stores the scripts used in the paper from Cecchetto et al.<sup>1</sup> "Seasonality of primary production explains the richness of pioneering benthic communities" to download satellite data corresponding to Sea Surface Salinity, Sea Surface Temperature, Diffuse Attenuation coefficient, Photosynthetic Available Radiation and calculate the Normalized Seasonality Index for seasonality of NPP, following Brown et al.<sup>2</sup>. This index is computed on the Vertically Generalized Production Model (VGPM), following codes and instructions at the Ocean Productivity website (http://sites.science.oregonstate.edu/ocean.productivity/).
 
 The scripts download satellite data, process and calculate the VGPM model from the ancillary data indicated by the Ocean Productivity website, providing a final average NSI index, for the specified time range, as well as the other environmental variables previously mentioned.
 
@@ -93,7 +93,7 @@ Inquiries can be forwarded to matteocecchetto@gmail.com
 
 ## References
 
-1 - Cecchetto et al. ???
+1 - Cecchetto et al. (2024) - https://doi.org/10.1038/s41467-024-52673-z
 
 2 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production 		and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
 
