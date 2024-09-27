@@ -85,7 +85,7 @@ Coastlines were obtained from the Global, Self‐consistent, Hierarchical, High�
 
 You are free to modify and use this script in your projects. If you use this script, we kindly request you to cite our paper as follows:
 
-[Author(s)]: "Title of the Paper," Conference/Journal Name, Year. [DOI or URL](link to the paper)
+Cecchetto, M., Dettai, A., Gallut, C. et al. Seasonality of primary production explains the richness of pioneering benthic communities. Nat Commun 15, 8340 (2024). https://doi.org/10.1038/s41467-024-52673-z
 
 ## Contact
 
@@ -93,7 +93,7 @@ Inquiries can be forwarded to matteocecchetto@gmail.com
 
 ## References
 
-1 - Cecchetto et al. (2024) - https://doi.org/10.1038/s41467-024-52673-z
+1 - Cecchetto, M., Dettai, A., Gallut, C. et al. Seasonality of primary production explains the richness of pioneering benthic communities. Nat Commun 15, 8340 (2024). https://doi.org/10.1038/s41467-024-52673-z
 
 2 - Brown, C. W., Schollaert Uz, S. & Corliss, B. H. Seasonality of oceanic primary production 		and its interannual variability from 1998 to 2007. Deep Sea Res. Part Oceanogr. Res. Pap. 90, 166–175 (2014).
 
